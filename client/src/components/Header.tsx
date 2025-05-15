@@ -1,15 +1,9 @@
 import { useAppContext } from "@/contexts/AppContext";
 import { APP_CONSTANTS } from "@/lib/constants";
+import LanguageSelector from "./LanguageSelector";
 
 export default function Header() {
-  const { connectionStatus, translate, setLanguage, language } = useAppContext();
-  
-  const toggleLanguage = () => {
-    const newLanguage = language === APP_CONSTANTS.LANGUAGES.HINDI 
-      ? APP_CONSTANTS.LANGUAGES.ENGLISH 
-      : APP_CONSTANTS.LANGUAGES.HINDI;
-    setLanguage(newLanguage);
-  };
+  const { connectionStatus, translate } = useAppContext();
   
   return (
     <header className="bg-primary text-white shadow-md">
@@ -22,13 +16,7 @@ export default function Header() {
           <div className={`${connectionStatus === APP_CONSTANTS.CONNECTION_STATUS.ONLINE ? 'online-indicator' : 'offline-indicator'} text-sm font-medium hidden md:flex`}>
             {translate(connectionStatus)}
           </div>
-          <button 
-            onClick={toggleLanguage}
-            className="p-2 rounded-full hover:bg-white/20"
-            title={language === APP_CONSTANTS.LANGUAGES.HINDI ? "Switch to English" : "हिंदी में स्विच करें"}
-          >
-            <span className="material-icons">translate</span>
-          </button>
+          <LanguageSelector />
           <button className="p-2 rounded-full hover:bg-white/20">
             <span className="material-icons">notifications</span>
           </button>
