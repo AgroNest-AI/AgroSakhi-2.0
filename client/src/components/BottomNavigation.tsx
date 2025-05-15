@@ -18,14 +18,14 @@ export default function BottomNavigation() {
       <div className="container mx-auto flex justify-around">
         {navItems.map(item => (
           <Link key={item.id} href={item.path}>
-            <a className={`flex flex-col items-center py-2 flex-1 ${
+            <div className={`flex flex-col items-center py-2 flex-1 cursor-pointer ${
               currentPage === item.id 
                 ? "text-primary border-t-2 border-primary" 
                 : "text-gray-600"
             }`}>
               <span className="material-icons">{item.icon}</span>
               <span className="text-xs mt-1">{item.label}</span>
-            </a>
+            </div>
           </Link>
         ))}
       </div>

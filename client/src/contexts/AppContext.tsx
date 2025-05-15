@@ -146,6 +146,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
-export function useAppContext() {
+// Use an arrow function for consistent export type
+export const useAppContext = () => {
   return useContext(AppContext);
 }

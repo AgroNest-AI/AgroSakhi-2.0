@@ -1,6 +1,14 @@
 import { APP_CONSTANTS } from './constants';
 
 // Type definition for Web Speech API
+// Add declaration for the Web Speech API
+declare global {
+  interface Window {
+    SpeechRecognition?: any;
+    webkitSpeechRecognition?: any;
+  }
+}
+
 interface SpeechRecognitionEvent extends Event {
   results: SpeechRecognitionResultList;
 }
@@ -34,39 +42,42 @@ export class SpeechRecognizer {
     this.language = language;
     
     // Check browser support
-    const SpeechRecognition = window.SpeechRecognition || (window as any).webkitSpeechRecognition;
-    
-    if (!SpeechRecognition) {
-      console.error('Speech recognition not supported in this browser');
-      return;
-    }
-    
-    this.recognition = new SpeechRecognition();
-    this.recognition.continuous = true;
-    this.recognition.interimResults = true;
-    this.recognition.lang = this.language;
-    
-    this.recognition.onresult = (event: SpeechRecognitionEvent) => {
-      if (this.callback) {
-        const result = event.results[event.results.length - 1];
-        const transcript = result[0].transcript;
-        const isFinal = result.isFinal;
+    if (typeof window !== 'undefined') {
+      const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+      
+      if (SpeechRecognitionAPI) {
+        this.recognition = new SpeechRecognitionAPI();
+        this.recognition.continuous = true;
+        this.recognition.interimResults = true;
+        this.recognition.lang = this.language;
         
-        this.callback(transcript, isFinal);
+        this.recognition.onresult = (event: SpeechRecognitionEvent) => {
+          if (this.callback) {
+            const result = event.results[event.results.length - 1];
+            const transcript = result[0].transcript;
+            const isFinal = result.isFinal;
+            
+            this.callback(transcript, isFinal);
+          }
+        };
+        
+        this.recognition.onerror = (event: any) => {
+          console.error('Speech recognition error', event.error);
+          this.isListening = false;
+        };
+        
+        this.recognition.onend = () => {
+          if (this.isListening) {
+            // Auto restart if still in listening mode
+            this.recognition.start();
+          }
+        };
+      } else {
+        console.error('Speech recognition not supported in this browser');
       }
-    };
-    
-    this.recognition.onerror = (event: any) => {
-      console.error('Speech recognition error', event.error);
-      this.isListening = false;
-    };
-    
-    this.recognition.onend = () => {
-      if (this.isListening) {
-        // Auto restart if still in listening mode
-        this.recognition.start();
-      }
-    };
+    } else {
+      console.error('Window is not defined, running in non-browser environment');
+    }
   }
   
   setLanguage(language: string) {
@@ -174,9 +185,9 @@ let synthesizer: SpeechSynthesizer;
 try {
   // Check if we're in a browser environment
   if (typeof window !== 'undefined') {
-    const SpeechRecognition = window.SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
     
-    if (SpeechRecognition) {
+    if (SpeechRecognitionAPI) {
       recognizer = new SpeechRecognizer();
       synthesizer = new SpeechSynthesizer();
     } else {
