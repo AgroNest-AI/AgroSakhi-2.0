@@ -153,4 +153,4 @@ AgroSakhi 2.0 is developed by AgroNest Ventures with contribution from the rural
 
 ## 📞 Contact
 
-For more information, please contact agrosakhi@agronest.in
+For more information, please contact support@agronest.org
