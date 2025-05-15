@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAppContext } from '@/contexts/AppContext';
 import { analyzeImage } from '@/lib/openai';
+import LocalizedText from './LocalizedText';
 
 export default function AICropAdvisory() {
   const { translate } = useAppContext();
@@ -37,10 +38,10 @@ export default function AICropAdvisory() {
       <div className="p-4 bg-green-50">
         <h3 className="text-lg font-bold text-primary flex items-center">
           <span className="material-icons mr-2">agriculture</span>
-          {translate('aiCropAdvisory')}
+          <LocalizedText>{translate('aiCropAdvisory')}</LocalizedText>
         </h3>
         <p className="text-sm text-gray-600 mt-1">
-          {translate('uploadImage')} {translate('analysisResult')}
+          <LocalizedText>{translate('uploadImage')} {translate('analysisResult')}</LocalizedText>
         </p>
       </div>
 
@@ -68,11 +69,11 @@ export default function AICropAdvisory() {
             <div className="border-2 border-dashed border-gray-300 rounded-lg w-full h-40 flex flex-col items-center justify-center p-4 mb-3">
               <span className="material-icons text-gray-400 text-4xl mb-2">image</span>
               <p className="text-gray-500 text-center text-sm">
-                {translate('uploadImage')}
+                <LocalizedText>{translate('uploadImage')}</LocalizedText>
               </p>
               <label className="mt-3 cursor-pointer">
                 <span className="bg-primary text-white px-4 py-2 rounded-md text-sm hover:bg-primary-dark">
-                  {translate('takePhoto')}
+                  <LocalizedText>{translate('takePhoto')}</LocalizedText>
                 </span>
                 <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
               </label>
@@ -88,12 +89,12 @@ export default function AICropAdvisory() {
               {isAnalyzing ? (
                 <>
                   <span className="material-icons animate-spin mr-2">autorenew</span>
-                  {translate('analysisResult')}...
+                  <LocalizedText>{translate('analysisResult')}...</LocalizedText>
                 </>
               ) : (
                 <>
                   <span className="material-icons mr-2">search</span>
-                  {translate('analysisResult')}
+                  <LocalizedText>{translate('analysisResult')}</LocalizedText>
                 </>
               )}
             </button>
