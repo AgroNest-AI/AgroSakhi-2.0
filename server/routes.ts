@@ -162,6 +162,70 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
+  // AI endpoints using OpenAI API
+  apiRouter.post("/ai/analyze-image", async (req: Request, res: Response) => {
+    try {
+      // In production, this would use the OpenAI API to analyze the image
+      // For now, we're simulating a response
+      const randomValue = Math.random();
+      
+      let result = "";
+      let confidence = 0;
+      
+      if (randomValue < 0.33) {
+        result = "आपके धान के खेत में झोंका रोग के लक्षण दिखाई दे रहे हैं। नाइट्रोजन उर्वरक की मात्रा कम करें और ट्राइसाइक्लाज़ोल का छिड़काव करें।";
+        confidence = 0.89;
+      } else if (randomValue < 0.66) {
+        result = "आपकी फसल स्वस्थ दिख रही है। पानी की नियमित आपूर्ति बनाए रखें और संतुलित उर्वरक का प्रयोग करें। अगले 15 दिनों में कीट नियंत्रण पर ध्यान दें।";
+        confidence = 0.95;
+      } else {
+        result = "फसल में जल प्रबंधन की कमी दिखाई दे रही है। सिंचाई की आवृत्ति बढ़ाएं और खेत में अधिक पानी भरें। धान की इस किस्म को अधिक जल की आवश्यकता होती है।";
+        confidence = 0.78;
+      }
+      
+      res.status(200).json({ result, confidence });
+    } catch (error) {
+      console.error("Error in AI image analysis:", error);
+      res.status(500).json({ 
+        error: "Analysis failed", 
+        message: "Could not analyze the image. Please try again." 
+      });
+    }
+  });
+
+  apiRouter.post("/ai/predict-weather", async (req: Request, res: Response) => {
+    try {
+      const { location, days = 7 } = req.body;
+      
+      // In production, this would use the OpenAI API for weather prediction
+      // For now, we're simulating a response
+      const forecast = Array.from({ length: days }, (_, i) => ({
+        date: new Date(Date.now() + i * 86400000).toISOString().split('T')[0],
+        temperature: { 
+          min: 24 + Math.floor(Math.random() * 3), 
+          max: 30 + Math.floor(Math.random() * 5) 
+        },
+        condition: ['साफ आसमान', 'आंशिक बादल', 'बारिश', 'गरज के साथ बारिश'][Math.floor(Math.random() * 4)],
+        rainfall: Math.random() < 0.3 ? Math.round(Math.random() * 50) : 0,
+        humidity: 60 + Math.floor(Math.random() * 30)
+      }));
+      
+      res.status(200).json({
+        forecast,
+        advisories: [
+          "अगले 3 दिनों में बारिश की संभावना है, फसल संरक्षण के लिए तैयारी करें।",
+          "उच्च तापमान के दिनों में सिंचाई सुबह या शाम को करें।"
+        ]
+      });
+    } catch (error) {
+      console.error("Error in AI weather prediction:", error);
+      res.status(500).json({ 
+        error: "Prediction failed", 
+        message: "Could not predict weather. Please try again." 
+      });
+    }
+  });
+  
   // Mount API router
   app.use("/api", apiRouter);
 
