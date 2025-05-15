@@ -143,7 +143,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setIsDataLoading,
   };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={value}>
+      <div className={`lang-${language}`} data-language={language}>
+        {children}
+      </div>
+    </AppContext.Provider>
+  );
 }
 
 // Use an arrow function for consistent export type

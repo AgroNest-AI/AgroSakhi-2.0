@@ -124,4 +124,41 @@
     border-radius: 50%;
     @apply bg-success mr-1.5;
   }
+
+  /* Language-specific font classes */
+  .lang-hindi {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  
+  .lang-bengali {
+    font-family: 'Noto Sans Bengali', sans-serif;
+  }
+  
+  .lang-tamil {
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+  
+  .lang-telugu {
+    font-family: 'Noto Sans Telugu', sans-serif;
+  }
+  
+  .lang-kannada {
+    font-family: 'Noto Sans Kannada', sans-serif;
+  }
+  
+  .lang-malayalam {
+    font-family: 'Noto Sans Malayalam', sans-serif;
+  }
+  
+  .lang-punjabi {
+    font-family: 'Noto Sans Gurmukhi', sans-serif;
+  }
+  
+  .lang-gujarati {
+    font-family: 'Noto Sans Gujarati', sans-serif;
+  }
+  
+  .lang-odia {
+    font-family: 'Noto Sans Oriya', sans-serif;
+  }
 }
