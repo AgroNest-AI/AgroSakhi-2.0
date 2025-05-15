@@ -1,19 +1,6 @@
 import { useState } from 'react';
 import { useAppContext } from '@/contexts/AppContext';
-
-// This would be connected to OpenAI Vision API in production
-const mockCropAnalysis = (imageFile: File): Promise<{result: string, confidence: number}> => {
-  return new Promise((resolve) => {
-    // Simulate API delay
-    setTimeout(() => {
-      // In production, this would call the OpenAI Vision API
-      resolve({
-        result: 'आपके धान के खेत में झोंका रोग के लक्षण दिखाई दे रहे हैं। नाइट्रोजन उर्वरक की मात्रा कम करें और ट्राइसाइक्लाज़ोल का छिड़काव करें।',
-        confidence: 0.89
-      });
-    }, 1500);
-  });
-};
+import { analyzeImage } from '@/lib/openai';
 
 export default function AICropAdvisory() {
   const { translate } = useAppContext();
@@ -31,12 +18,12 @@ export default function AICropAdvisory() {
     }
   };
 
-  const analyzeImage = async () => {
+  const processImage = async () => {
     if (!selectedImage) return;
     
     setIsAnalyzing(true);
     try {
-      const result = await mockCropAnalysis(selectedImage);
+      const result = await analyzeImage(selectedImage);
       setAnalysis(result);
     } catch (error) {
       console.error('Error analyzing image:', error);
@@ -94,7 +81,7 @@ export default function AICropAdvisory() {
 
           {previewUrl && !analysis && (
             <button 
-              onClick={analyzeImage} 
+              onClick={processImage} 
               disabled={isAnalyzing}
               className={`w-full mt-3 py-2 rounded-md ${isAnalyzing ? 'bg-gray-400' : 'bg-primary hover:bg-primary-dark'} text-white flex items-center justify-center`}
             >
