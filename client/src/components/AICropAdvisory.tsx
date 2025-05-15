@@ -103,12 +103,12 @@ export default function AICropAdvisory() {
           {analysis && (
             <div className="mt-3 p-3 bg-green-50 rounded-lg w-full">
               <div className="flex justify-between items-start mb-2">
-                <h4 className="font-medium text-primary">{translate('analysisResult')}</h4>
+                <h4 className="font-medium text-primary"><LocalizedText>{translate('analysisResult')}</LocalizedText></h4>
                 <div className="bg-primary text-white text-xs px-2 py-1 rounded-full">
-                  {Math.round(analysis.confidence * 100)}% {translate('confidence')}
+                  {Math.round(analysis.confidence * 100)}% <LocalizedText>{translate('confidence')}</LocalizedText>
                 </div>
               </div>
-              <p className="text-gray-700">{analysis.result}</p>
+              <p className="text-gray-700"><LocalizedText>{analysis.result}</LocalizedText></p>
             </div>
           )}
         </div>
