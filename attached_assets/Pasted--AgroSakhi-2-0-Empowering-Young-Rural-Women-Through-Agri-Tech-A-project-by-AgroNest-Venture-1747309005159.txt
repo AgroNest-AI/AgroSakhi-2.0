@@ -1,0 +1,85 @@
+# 🌾 AgroSakhi 2.0™ – Empowering Young Rural Women Through Agri-Tech
+_A project by AgroNest Ventures Private Limited (AgroNest AI)_
+
+## 🚀 Project Overview
+
+**AgroSakhi 2.0™** is a patentable, AI-IoT-powered platform designed to transform the lives of **underprivileged young women (ages 18–30)** in rural India by equipping them with smart agricultural tools, knowledge, and entrepreneurial pathways. This project aims to close gender, technology, and market access gaps in the agricultural sector—starting from the grassroots.
+
+---
+
+## 🧠 Core Components
+
+### 1. AgroSakhi Band™
+> A smart, solar-powered wearable for women farmers.
+
+- Monitors soil moisture, air humidity, ambient temperature, and movement.
+- Provides vibration and voice alerts for field conditions, health reminders, and task schedules.
+- Connects to mobile via BLE or to the field station via LoRaWAN.
+
+### 2. AgriDidi AI™ (Mobile App)
+> A multilingual, voice-first digital assistant.
+
+- Offers personalized crop and livestock advisory.
+- Works offline with periodic data sync.
+- Tailored to local dialects and literacy levels.
+
+### 3. SakhiSense™ (Field IoT Node)
+> Solar-powered field stations for community use.
+
+- Monitors soil health, pest risk, rainfall, and climate data.
+- Triggers automated alerts and syncs with AgroSakhi Bands and mobile devices.
+- Offers edge AI for offline inferencing.
+
+### 4. AgroChain Marketplace
+> A blockchain-backed produce exchange system.
+
+- Ensures traceability, fair pricing, and digital payments.
+- Enables peer-to-peer trading among women-led cooperatives.
+- Records produce quality, GPS origin, and transaction history.
+
+### 5. SakhiShakti Academy
+> A modular digital learning hub.
+
+- Offers training in agri-tech, digital tools, microfinance, leadership, and rights awareness.
+- Accessible via mobile app or SMS-based interactive learning.
+- Includes gamified learning and certification pathways.
+
+---
+
+## 🌍 Impact Goals (5-Year Targets)
+
+| Metric                        | Target                        |
+|------------------------------|-------------------------------|
+| Women Trained                | 1 million                     |
+| Average Income Growth        | 2–3×                          |
+| Digital + Financial Literacy | 80% coverage                  |
+| Crop Yield Increase          | +30%                          |
+| Co-ops Formed                | 20,000+                       |
+| Crops Supported              | 50+                           |
+
+---
+
+## 🔗 UN Sustainable Development Goals (SDGs) Aligned
+
+- **SDG 1**: No Poverty  
+- **SDG 2**: Zero Hunger  
+- **SDG 5**: Gender Equality  
+- **SDG 8**: Decent Work and Economic Growth  
+- **SDG 10**: Reduced Inequalities  
+- **SDG 13**: Climate Action  
+- **SDG 17**: Partnerships for the Goals  
+
+---
+
+## 📦 Repository Structure
+
+```bash
+AgroSakhi-2.0/
+├── /docs                # Design specs, diagrams, case studies
+├── /hardware            # IoT device firmware and circuit design
+├── /mobile-app          # Flutter-based mobile app code (AgriDidi AI)
+├── /ai-models           # ML models for crop, pest, and health predictions
+├── /blockchain          # Smart contracts for AgroChain
+├── /learning-modules    # Content for SakhiShakti Academy
+├── /scripts             # Deployment, monitoring, testing tools
+└── README.md            # Project overview
